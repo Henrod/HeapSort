@@ -74,9 +74,8 @@ unsigned int Heap::size() const {
 }
 
 void Heap::heapsort() {
-	int N = mHeap.size();
+	int N = mHeap.size() - 1;
 	sort();
-	--N;
 
 	while (N > 1) {
 		exch(1, N--);
