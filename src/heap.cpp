@@ -45,15 +45,6 @@ int  Heap::getMax() const {
 	return aux_heap.getHeap()[1];
 }
 
-void Heap::sink(unsigned int k, const unsigned int size) {
-	while (2*k <= size) {
-		unsigned int j = 2*k; //Son, k is Parent
-		if (j < size && mHeap[j] < mHeap[j+1]) ++j;
-		if (mHeap[k] > mHeap[j]) break;
-		exch(j, k);
-		k = j;
-	}
-}
 
 void Heap::exch(int i, int j) {
 	int tmp = mHeap[i];
@@ -83,6 +74,15 @@ void Heap::heapsort() {
 	}
 }
 
+void Heap::sink(unsigned int k, const unsigned int size) {
+	while (2*k <= size) {
+		unsigned int j = 2*k; //Son, k is Parent
+		if (j + 1 < size && mHeap[j] < mHeap[j+1]) ++j;
+		if (mHeap[k] > mHeap[j]) break;
+		exch(j, k);
+		k = j;
+	}
+}
 void Heap::sort() {
 	unsigned int N = mHeap.size();
 	for (unsigned int k = N/2; k >= 1; --k) {
